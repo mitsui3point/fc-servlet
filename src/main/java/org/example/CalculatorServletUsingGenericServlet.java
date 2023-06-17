@@ -7,11 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintStream;
 
 /**
  * 라이프사이클과 관련된 메서드
@@ -23,13 +19,13 @@ import java.io.PrintStream;
  * {@link Servlet#getServletConfig()}
  * {@link Servlet#getServletInfo()}
  */
-@WebServlet("/calculate")//url path 와 servlet 매칭을 위해 사용
-public class CalculatorServlet extends HttpServlet {
+//@WebServlet("/calculate")//url path 와 servlet 매칭을 위해 사용
+public class CalculatorServletUsingGenericServlet extends GenericServlet {
 
-    private static final Logger log = LoggerFactory.getLogger(CalculatorServlet.class);
+    private static final Logger log = LoggerFactory.getLogger(CalculatorServletUsingGenericServlet.class);
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
         log.info("service");
         int operand1 = Integer.parseInt(request.getParameter("operand1"));
         String operator = request.getParameter("operator");
