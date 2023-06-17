@@ -37,3 +37,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### WEB-INF ###
+/tomcat.8080
+/webapp
