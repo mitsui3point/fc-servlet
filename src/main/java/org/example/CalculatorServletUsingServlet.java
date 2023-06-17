@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
-import java.io.PrintStream;
 
 /**
  * 라이프사이클과 관련된 메서드
@@ -20,10 +19,14 @@ import java.io.PrintStream;
  * {@link Servlet#getServletConfig()}
  * {@link Servlet#getServletInfo()}
  */
-@WebServlet("/calculate")//url path 와 servlet 매칭을 위해 사용
-public class CalculatorServlet extends GenericServlet {
+//@WebServlet("/calculate")//url path 와 servlet 매칭을 위해 사용
+public class CalculatorServletUsingServlet implements Servlet {
 
-    private static final Logger log = LoggerFactory.getLogger(CalculatorServlet.class);
+    private static final Logger log = LoggerFactory.getLogger(CalculatorServletUsingServlet.class);
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        log.info("init");
+    }
 
     @Override
     public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
@@ -40,5 +43,20 @@ public class CalculatorServlet extends GenericServlet {
         );
         response.getWriter()
                 .write(result);
+    }
+
+    @Override
+    public void destroy() {
+        log.info("destroy");
+    }
+
+    @Override
+    public ServletConfig getServletConfig() {
+        return null;
+    }
+
+    @Override
+    public String getServletInfo() {
+        return null;
     }
 }
